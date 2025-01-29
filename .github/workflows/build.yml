@@ -1,0 +1,37 @@
+name: Build Installer for Windows, Mac, Linux
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller requests
+
+    - name: Build installer
+      run: |
+        pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
+
+    - name: Upload the installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: installer
+        path: dist/
