@@ -28,7 +28,7 @@ jobs:
 
     - name: Build installer
       run: |
-        pyinstaller --onefile --noconsole --name=2898_Scouter_Installer your_script.py
+        pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
 
     - name: Upload the installer
       uses: actions/upload-artifact@v3
