@@ -28,14 +28,17 @@ jobs:
 
     - name: Build installer
       run: |
+        # Run PyInstaller to create the basic installer
+        pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
+
         if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
-          mv dist/2898_Scouter_Installer.exe dist/2898_Scouter_Installer.exe
+          # Rename the output to .exe for Windows
+          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.exe
         elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-          pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
+          # Create .dmg for macOS (using dmgbuild or similar tools if needed)
           mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.dmg
         elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-          pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
+          # Create .tar.gz for Linux
           mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.tar.gz
         fi
 
@@ -43,4 +46,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: 2898_Scouter_Installer-${{ matrix.os }}
-        path: dist/
+        path: dist/2898_Scouter_Installer*
