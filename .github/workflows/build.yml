@@ -7,11 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout code
@@ -25,25 +25,26 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pyinstaller requests
+      shell: bash
 
     - name: Build installer
+      shell: bash
       run: |
-        # Run PyInstaller to create the basic installer
-        pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
+        pyinstaller --onefile --name=2898_Scouter_Installer installer.py
 
-        if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          # Rename the output to .exe for Windows
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.exe
-        elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-          # Create .dmg for macOS (using dmgbuild or similar tools if needed)
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.dmg
-        elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-          # Create .tar.gz for Linux
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer.tar.gz
+    - name: Rename artifacts for platform
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          mv dist/2898_Scouter_Installer.exe dist/2898_Scouter_Installer-Windows.exe
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          zip -r dist/2898_Scouter_Installer-Mac.zip dist/2898_Scouter_Installer
+        elif [[ "$RUNNER_OS" == "Linux" ]]; then
+          tar -czvf dist/2898_Scouter_Installer-Linux.tar.gz -C dist/2898_Scouter_Installer
         fi
 
     - name: Upload the installer
       uses: actions/upload-artifact@v4
       with:
-        name: 2898_Scouter_Installer-${{ matrix.os }}
-        path: dist/2898_Scouter_Installer*
+        name: 2898_Scouter_Installer-${{ runner.os }}
+        path: dist/*
