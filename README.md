@@ -12,7 +12,7 @@ Tested on:
 To use the latest development installer (assuming you have Python installed):
 1. Download `installer.py` from this repository.
 2. Install the python module `requests`. For Ubuntu/Debian, run `sudo apt install python3-requests`. For Arch Linux, run `sudo pacman -S python-requests`. For Windows/macOS, run `pip3 install requests` or `pip install requests`.
-3. Run the installer with `python3 installer.py` or `python installer.py` (assuming you are in the same directory where you saved the installer. Do NOT run the installer or SYSTEM, TrustedInstaller, or Public (on Windows), or root (on macOS/Linux).
+3. Run the installer with `python3 installer.py` or `python installer.py` (assuming you are in the same directory where you saved the installer. Do NOT run the installer as SYSTEM, TrustedInstaller, or Public (on Windows), or root (on macOS/Linux).
 4. The installer should run!
 To use the latest stable installer:
 1. Download the latest binary for your OS in the releases tab (use the Ubuntu one regardless of Linux distro).
