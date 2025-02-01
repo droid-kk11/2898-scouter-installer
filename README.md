@@ -15,7 +15,7 @@ To use the latest development installer (assuming you have Python installed):
 3. Run the installer with `python3 installer.py` or `python installer.py` (assuming you are in the same directory where you saved the installer. Do NOT run the installer as SYSTEM, TrustedInstaller, or Public (on Windows), or root (on macOS/Linux).
 4. The installer should run!
 To use the latest stable installer:
-1. Download the latest binary for your OS in the releases tab (use the Ubuntu one regardless of Linux distro).
+1. Download the latest binary for your OS in the releases tab. Binaries are only 64-bit.
 2. Open a terminal and change directory to the same directory as the downloaded binary. (On Windows, you may be able to run the installer by double clicking the exe file).
 3. Run the installer with either ```2898_Scouter_Installer_win.exe``` (for Windows), ```chmod +x 2898_Scouter_Installer_mac && ./2898_Scouter_Installer_mac``` (for macOS), or ```chmod +x 2898_Scouter_Installer_linux && ./2898_Scouter_Installer_linux``` (for Linux).
 4. The installer should run!
