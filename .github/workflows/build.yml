@@ -1,17 +1,10 @@
-name: Build Installer for Windows, Mac, Linux
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}  # <-- This line makes the job run on the correct OS
 
     steps:
     - name: Checkout code
@@ -28,19 +21,16 @@ jobs:
 
     - name: Build installer
       run: |
-        # Run PyInstaller to create the basic installer
         pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
 
-        if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          # Rename the output to .exe for Windows
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer_win.exe
-        elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-          # Create .dmg for macOS (using dmgbuild or similar tools if needed)
+        if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+          mv dist/2898_Scouter_Installer.exe dist/2898_Scouter_Installer_win.exe
+        elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
           mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer_mac
-        elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-          # Create .tar.gz for Linux
+        elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
           mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer_linux
         fi
+      shell: bash
 
     - name: Upload the installer
       uses: actions/upload-artifact@v4
