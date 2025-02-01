@@ -1,7 +1,7 @@
 # 2898 Scouter Installer
 The official installer for [2898 Scouter](https://github.com/Ant-Throw-Pology/2898-scouter). Version numbering of the installer is unrelated to the scouter.
 
-Available for Windows, macOS, and Linux. Please test it out and let us know how it goes. If you run into any issues, please be sure to open an issue. For any code suggestions, please be sure to make a PR.
+Available for Windows, macOS, Crostini, and Linux (64-bit). Please test it out and let us know how it goes. If you run into any issues, please be sure to open an issue. For any code suggestions, please be sure to make a PR.
 
 Tested on:
 
