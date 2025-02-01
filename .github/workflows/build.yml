@@ -4,7 +4,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
-    runs-on: ${{ matrix.os }}  # <-- This line makes the job run on the correct OS
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout code
@@ -24,11 +24,11 @@ jobs:
         pyinstaller --onefile --noconsole --name=2898_Scouter_Installer installer.py
 
         if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-          mv dist/2898_Scouter_Installer.exe dist/2898_Scouter_Installer_win.exe
+          mv dist/2898_Scouter_Installer.exe dist/2898_Scouter_setup.exe
         elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer_mac
+          mv dist/2898_Scouter_Installer dist/Scouter_setup_mac
         elif [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-          mv dist/2898_Scouter_Installer dist/2898_Scouter_Installer_linux
+          mv dist/2898_Scouter_Installer dist/Scouter_setup_linux
         fi
       shell: bash
 
